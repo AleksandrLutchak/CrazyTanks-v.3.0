@@ -3,56 +3,68 @@
 
 Engine::Engine()
 {
-	init();
-}
-void Engine::init()
-{
+	//Wall
+	/*===============================================*/
 	Object Wall;
 	Wall.Skin = '#';
+	/*===============================================*/
 
+	//Gold
+	/*===============================================*/
 	Object Gold;
 	Gold.HealthPoints = 2;
+	/*===============================================*/
 
+	//PlayerTank
+	/*===============================================*/
 	Object PlayerTank;
 	PlayerTank.Skin = 'W';
-	//PlayerTank.xPosition;
+	PlayerTank.xPosition = row / 2;
+	PlayerTank.yPosition = column - 1;
+	/*===============================================*/
 
+	//EnemyTank
+	/*===============================================*/
 	Object EnemyTank;
 	EnemyTank.Skin = 'O';
 	EnemyTank.HealthPoints = 1;
+	/*===============================================*/
 
 	PrepareMatrixBoard(MatrixBoard, Wall.Skin);
-	print();
 }
 
-void Engine::PrepareGame()
+void Engine::Start()
 {
-
+	GameLoop();
 }
 
-void Engine::PrepareMatrixBoard(char(&arr)[rowANDcolumn][rowANDcolumn], char Wall)
+void Engine::GameLoop()
 {
-	for (int i = 0; i < rowANDcolumn; i++)
+	while (!exitGame)
 	{
-		for (int j = 0; j < rowANDcolumn; j++)
-		{
-			if (i == 0 || j == 0 || i == rowANDcolumn -1 || j == rowANDcolumn -1 )
-			{
-				arr[i][j] = Wall;
-			}
-			else
-			{
-				arr[i][j] = ' ';
-			}
-		}
+		print(MatrixBoard);
+		Sleep(20);
+		system("cls");
 	}
 }
-void Engine::print()
+
+
+void Engine::PrepareMatrixBoard(char(&arr)[column][row], char Wall)
 {
-	for (int i = 0; i < rowANDcolumn; i++)
+	for (int i = 0; i < column; i++)
+		for (int j = 0; j < row; j++)
+			if (i == 0 || j == 0 || i == column -1 || j == row -1 )
+				arr[i][j] = Wall;
+			else
+				arr[i][j] = ' ';
+}
+
+void Engine::print(char(&arr)[column][row])
+{
+	for (int i = 0; i < column; i++)
 	{
-		for (int j = 0; j < rowANDcolumn; j++)
-			std::cout << MatrixBoard[i][j];
+		for (int j = 0; j < row; j++)
+			std::cout << arr[i][j];
 		std::cout << std::endl;
 	}
 }

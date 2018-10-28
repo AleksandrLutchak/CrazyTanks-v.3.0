@@ -2,25 +2,32 @@
 #define ENGINE_H
 
 #include <iostream>
+#include <Windows.h>
+#include <stdio.h>
 #include "Objects.h"
 
 
 	class Engine
 	{
 	public:
-		static const int rowANDcolumn = 24;
-		
-		char MatrixBoard[rowANDcolumn][rowANDcolumn]{};
+		static const int row = 48;
+		static const int column = 24;
+				
+		char MatrixBoard[column][row]{};
+
+		bool exitGame = false;
+
+	public:
+		void Start();
 
 		 Engine();
 		~Engine();
 
 	private:
-			
-		void init();
-		void PrepareMatrixBoard(char (&arr)[rowANDcolumn][rowANDcolumn], char Wall);
-		void PrepareGame();
-		void print();
+		void PrepareMatrixBoard(char (&arr)[column][row], char Wall);
+		void print(char(&arr)[column][row]);
+
+		void GameLoop();
 
 	};
 
