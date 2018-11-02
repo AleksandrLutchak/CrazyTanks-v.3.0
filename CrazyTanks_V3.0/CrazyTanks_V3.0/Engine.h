@@ -4,7 +4,9 @@
 #include <iostream>
 #include <Windows.h>
 #include <stdio.h>
-#include "Objects.h"
+#include <conio.h>
+
+#include "Tank.h"
 
 
 	class Engine
@@ -27,7 +29,10 @@
 		void PrepareMatrixBoard(char (&arr)[column][row], char Wall);
 		void print(char(&arr)[column][row]);
 
+		void RenderObjectsOnMap(char(&arr)[column][row]);
+
 		void GameLoop();
+
 
 	};
 

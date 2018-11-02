@@ -2,52 +2,59 @@
 #include "Engine.h"
 
 Engine::Engine()
-{
-	//Wall
-	/*===============================================*/
-	Object Wall;
-	Wall.Skin = '#';
-	/*===============================================*/
-
-	//Gold
-	/*===============================================*/
-	Object Gold;
-	Gold.HealthPoints = 2;
-	/*===============================================*/
-
-	//PlayerTank
-	/*===============================================*/
-	Object PlayerTank;
-	PlayerTank.Skin = 'W';
-	PlayerTank.xPosition = row / 2;
-	PlayerTank.yPosition = column - 1;
-	/*===============================================*/
-
-	//EnemyTank
-	/*===============================================*/
-	Object EnemyTank;
-	EnemyTank.Skin = 'O';
-	EnemyTank.HealthPoints = 1;
-	/*===============================================*/
-
-	PrepareMatrixBoard(MatrixBoard, Wall.Skin);
-}
+{}
 
 void Engine::Start()
 {
+	//Wall
+	/*====================*/
+	Object Wall;
+	Wall.Skin = '#';
+
+	//Gold
+	/*====================*/
+	Object Gold;
+	Gold.HealthPoints = 2;
+	
+	//PlayerTank
+	/*====================*/
+	TankProperties PlayerTank;
+	PlayerTank.Skin = 'W';
+	PlayerTank.xPosition = row / 2;
+	PlayerTank.yPosition = column - 1;
+	
+	//EnemyTank
+	/*====================*/
+	Object EnemyTank;
+	EnemyTank.Skin = 'O';
+	EnemyTank.HealthPoints = 1;
+	
+	PrepareMatrixBoard(MatrixBoard, Wall.Skin);
+
 	GameLoop();
 }
+
+
 
 void Engine::GameLoop()
 {
 	while (!exitGame)
 	{
 		print(MatrixBoard);
-		Sleep(20);
+		Tank PlayerTank;
+
+		if (_kbhit())
+			PlayerTank.Movement();
+
+		Sleep(10);
 		system("cls");
 	}
 }
 
+void Engine::RenderObjectsOnMap(char(&arr)[column][row])
+{
+
+}
 
 void Engine::PrepareMatrixBoard(char(&arr)[column][row], char Wall)
 {
@@ -68,6 +75,10 @@ void Engine::print(char(&arr)[column][row])
 		std::cout << std::endl;
 	}
 }
+
+
+
+
 
 Engine::~Engine()
 {}
